@@ -1,0 +1,4 @@
+netsim/__pycache__
+plot/*.png
+proxy/proxy.py
+*.log
