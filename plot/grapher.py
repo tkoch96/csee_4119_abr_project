@@ -144,7 +144,7 @@ for i, (x,y) in enumerate(TPUT_y):
 titles = ['Utilization', 'Fairness', 'Smoothness']
 xlabels = ['Time (s)', 'Time (s)', 'Time (s)']
 ylabels = ['% of link utilization', 'Jain Fairness', 'Derivative of BR wrt time']
-labels = ('Host0', 'Host1')
+labels = ['Host0', 'Host1']
 outputs = ['utilization.png', 'fairness.png', 'smoothness.png']
 colors = ['b','r']
 style = ['-','--']
@@ -159,18 +159,17 @@ lines = []
 for i in range(0,3):
     font = { 'size' : 22}
     plt.rc('font', **font)
-    params = {'legend.fontsize': 20,
-              'legend.linewidth': 2,
-              'xtick.major.size': 7,
-              'xtick.major.width': 3,
-              'ytick.major.size': 7,
-              'ytick.major.width': 3,
-              'ytick.labelsize': 16,
-              'xtick.minor.size': 5,
-              'xtick.minor.width': 2,
-              'ytick.minor.size': 5,
-              'ytick.minor.width': 2}
-    plt.rcParams.update(params)
+    # params = {'legend.fontsize': 20,
+    #           'xtick.major.size': 7,
+    #           'xtick.major.width': 3,
+    #           'ytick.major.size': 7,
+    #           'ytick.major.width': 3,
+    #           'ytick.labelsize': 16,
+    #           'xtick.minor.size': 5,
+    #           'xtick.minor.width': 2,
+    #           'ytick.minor.size': 5,
+    #           'ytick.minor.width': 2}
+    # plt.rcParams.update(params)
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -189,8 +188,7 @@ for i in range(0,3):
             ax.vlines(l[0],0,y[1], color='c', linestyles='dotted', linewidth=5.0)
 
     if i == 2:
-        handles, labels = ax.get_legend_handles_labels()
-        ax.legend(reversed(handles), reversed(labels), 'lower right')
+        ax.legend()
         ymax[i] = y[1]
         ymin[i] = y[0]
     x = ax.get_xlim()
