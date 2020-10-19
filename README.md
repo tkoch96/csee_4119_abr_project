@@ -2,4 +2,4 @@
 
 To get the newest version of starter code:
 
-		git pull
+		git pull origin master
