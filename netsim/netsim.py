@@ -122,7 +122,7 @@ def execute_event(event):
         
         if args.log:
             with open(args.log, 'a') as logfile:
-                logfile.write('%f %s %s %s\n' % (time.time(), event[1], bw_to_kbps(event[2]), lat_to_ms(event[3])))
+                logfile.write('%f %s %s %s %s\n' % (time.time(), event[0], event[1], bw_to_kbps(event[2]), lat_to_ms(event[3])))
             logfile.closed
     except Exception as e:
         logging.getLogger(__name__).error(e)
