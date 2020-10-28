@@ -17,11 +17,16 @@
 #		   (e.g., 200ms or 1s)
 #
 
-0 link1 100mbit 0ms  # start link BW at 100 mb/s
-0 link2 100mbit 0ms  # start link BW at 100 mb/s
-0 link3 100mbit 0ms  # start link BW at 100 mb/s
-* link1 500kbit 0ms  # press enter to decrease BW to 500 kb/s
-0 link2 500kbit 0ms  # decrease BW to 500 kb/s
-0 link3 500kbit 0ms  # decrease BW to 500 kb/s
+# Use this event list for generating the plots for your writeup. If you want
+# to make other event scripts for testing purposes, make them in separate files
+# and use the -e flag on netsim.py (run netsim.py -h for more info).
+
+0 link1 1mbit 0ms  # start link BW at 1 mbps
+20 link1 800kbit 0ms  
+20 link1 750kbit 0ms
+5 link1 450kbit 0ms 
+5 link1 650kbit 0ms
+5 link1 450kbit 0ms
+5 link1 250kbit 0ms
 
 # continue with your own test scenarios...

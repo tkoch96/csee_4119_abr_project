@@ -9,14 +9,7 @@
 # IP addresses may be specified in any order and do not need to be specified
 # twice (e.g., you do not need both ip1 link1 ip2 AND ip2 link1 ip1).
 
+1.0.0.1 link1 3.0.0.1
 1.0.0.1 link1 4.0.0.1
-1.0.0.1 link2 5.0.0.1
-1.0.0.1 link3 6.0.0.1
-
+2.0.0.1 link1 3.0.0.1
 2.0.0.1 link1 4.0.0.1
-2.0.0.1 link2 5.0.0.1
-2.0.0.1 link3 6.0.0.1
-
-3.0.0.1 link1 4.0.0.1
-3.0.0.1 link2 5.0.0.1
-3.0.0.1 link3 6.0.0.1
