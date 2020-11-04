@@ -123,7 +123,7 @@ for i in range(len(BR_y)):
 # Get Utility
 BW = []
 for l in nsl:
-    (t, ln, bw, lat) = l.split(' ')
+    (t, _, ln, bw, lat) = l.split(' ')
     t = int(float(t))
     t = max(t-t_0, 0)
     BW.append((t, bw))
