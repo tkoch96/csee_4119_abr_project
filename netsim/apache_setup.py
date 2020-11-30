@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 
 import sys
-sys.path.append('../common')
 
 import os
 import shutil
 import logging
 import distro
-from util import check_output, strip_comments
+from csee_4119_abr_project.common.util import check_output, strip_comments
 
 NETSIM_STRING = '# Modified by netsim'
 
