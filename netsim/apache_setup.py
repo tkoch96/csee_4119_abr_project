@@ -6,8 +6,11 @@ import os
 import shutil
 import logging
 import distro
-from csee_4119_abr_project.common.util import check_output, strip_comments
-
+try:
+    from csee_4119_abr_project.common.util import check_output, strip_comments
+except ModuleNotFoundError:
+    sys.path.append("..")
+    from common.util import check_output, strip_comments
 NETSIM_STRING = '# Modified by netsim'
 
 APACHE_UBUNTU = 'sudo /etc/init.d/apache2'

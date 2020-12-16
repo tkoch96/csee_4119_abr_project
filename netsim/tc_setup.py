@@ -1,11 +1,15 @@
+
 #!/usr/bin/python3
 
 import sys
 
 import argparse
 import hashlib
-from csee_4119_abr_project.common.util import check_output, check_both
-
+try:
+    from csee_4119_abr_project.common.util import check_output, check_both
+except ModuleNotFoundError:
+    sys.path.append("..")
+    from common.util import check_output, check_both
 TC='sudo /sbin/tc'
 DEFAULT_CLASS=9999
 ROOT_Q_HANDLE=9999

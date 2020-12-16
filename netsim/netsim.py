@@ -5,10 +5,15 @@ import os
 import time
 import logging
 import argparse
-from csee_4119_abr_project.common.util import check_output, check_both, run_bg, strip_comments
-from csee_4119_abr_project.netsim.apache_setup import configure_apache, reset_apache, restart_apache, is_apache_configured
-from csee_4119_abr_project.netsim.tc_setup import TC_Wrapper
-
+try:
+	from csee_4119_abr_project.common.util import check_output, check_both, run_bg, strip_comments
+	from csee_4119_abr_project.netsim.apache_setup import configure_apache, reset_apache, restart_apache, is_apache_configured
+	from csee_4119_abr_project.netsim.tc_setup import TC_Wrapper
+except ModuleNotFoundError:
+	sys.path.append("..")
+	from common.util import check_output, check_both, run_bg, strip_comments
+	from apache_setup import configure_apache, reset_apache, restart_apache, is_apache_configured
+	from tc_setup import TC_Wrapper
 # click
 CLICK_CONF = 'autogen.click'
 CLICK = '/usr/local/bin/click'
