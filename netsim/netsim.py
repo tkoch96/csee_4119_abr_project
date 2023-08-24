@@ -178,20 +178,13 @@ class Netsim():
 			self.execute_event(event)
 		logging.getLogger(__name__).info('Done running events.')
 
-	def start_network(self):
+	def checkstopnetsim(self):
 		if self.network_running():
-			logging.getLogger(__name__).info('Some network components already running...')
+			logging.getLogger(__name__).info('Stopping netsim...')
 			self.stop_network()
 
+	def start_network(self):
 		logging.getLogger(__name__).info('Starting simulated network...')
-
-		# Create fake NICs
-		logging.getLogger(__name__).info('Creating network interfaces...')
-		self.autogen_click_conf(self.get_topo_file('servers'), self.get_topo_file('clients'), self.get_topo_file('dns'))
-		if os.path.isfile(CLICK):
-			run_bg('sudo {} {}'.format(CLICK, CLICK_CONF))
-		else:
-			run_bg('sudo %s %s' % (CLICK_LOCAL, CLICK_CONF))
 
 		# Set up traffic shaping
 		logging.getLogger(__name__).info('Enabling traffic shaping...')
@@ -246,10 +239,18 @@ class Netsim():
 		logging.getLogger(__name__).info('Destroying network interfaces...')
 		try:
 			check_both('killall -9 click', shouldPrint=False)
-			time.sleep(0.1)
+			time.sleep(1)
 		except:
 			pass
+		# Remove autogen file
+		if os.path.exists(CLICK_CONF):
+			check_output('rm {}'.format(CLICK_CONF), shouldPrint=False)
+
 		logging.getLogger(__name__).info('Network stopped.')
+	
+	def buildclick(self):
+		self.autogen_click_conf(self.get_topo_file('servers'), self.get_topo_file('clients'), self.get_topo_file('dns'))
+
 
 def main(args):
 	ns = Netsim(args)
@@ -262,12 +263,17 @@ def main(args):
 	elif args.command == 'restart':
 		ns.stop_network()
 		ns.start_network()
+	elif args.command == 'checkstopnetsim':
+		ns.checkstopnetsim()
+	elif args.command == 'buildclick':
+		ns.buildclick()
 
 if __name__ == "__main__":
 	# set up command line args
 	parser = argparse.ArgumentParser(description='Launch a simulated network.')
 	parser.add_argument('topology', help='directory containing the topology files (topo.clients, topo.servers, topo.bottlenecks, topo.events, where topo is the name of the topology)')
-	parser.add_argument('command', choices=['start','stop','restart','run'], help='start/stop/restart the network, or run a series of link events?')
+	parser.add_argument('command', choices=['start','stop','restart','run','checkstopnetsim','buildclick'], 
+		help='start/stop/restart the network, or run a series of link events?')
 	parser.add_argument('-l', '--log', default=None, help='log file for logging events (overwrites file if it already exists)')
 	parser.add_argument('-e', '--events', default=None, help='specify a custom events file to use in place of the one contained in the topology directory')
 	parser.add_argument('-q', '--quiet', action='store_true', default=False, help='only print errors')

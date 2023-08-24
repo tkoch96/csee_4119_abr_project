@@ -1,0 +1,13 @@
+1.0.0.1 router1
+2.0.0.1 router1
+1.0.0.1 router2
+2.0.0.1 router2
+
+3.0.0.1 router3
+4.0.0.1 router4
+
+5.0.0.1 router2
+5.0.0.1 router1
+
+router1 router3
+router2 router4

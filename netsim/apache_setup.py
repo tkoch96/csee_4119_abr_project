@@ -61,7 +61,6 @@ def is_apache_configured_split_conf(ports):
                 if NETSIM_STRING in line:
                     found = True
                     break
-        portsf.closed
     except Exception as e:
         logging.getLogger(__name__).error(e)
     return found
@@ -101,7 +100,7 @@ def configure_apache_single_conf(ip_list, conf, conf_bak, doc_root):
                     break
         conffile.closed
         with open(conf, 'a') as conffile:
-            conffile.write('%s\n' % NETSIM_STRING)
+            conffile.write('\n%s\n' % NETSIM_STRING)
             if not found:
                 conffile.write('\nServerName www.example.com:80\n')
             for ip in ip_list:
@@ -118,14 +117,12 @@ def configure_apache_split_conf(ip_list, ports, ports_bak, sites_available, site
         shutil.copyfile(ports, ports_bak)
         with open(ports, 'a') as portsfile:
             portsfile.write('%s\n' % NETSIM_STRING)
-        portsfile.closed
-            
+        
         for ip in ip_list:
             # append virtual hosts to ports.conf
             with open(ports, 'a') as portsfile:
-                    portsfile.write('\n\nNameVirtualHost %s:8080\n' % ip)
-                    portsfile.write('Listen %s:8080' % ip)
-            portsfile.closed
+                portsfile.write('\n\nNameVirtualHost %s:8080\n' % ip)
+                portsfile.write('Listen %s:8080' % ip)
 
             # make a conf file for this virtual host
             confpath = os.path.join(sites_available, ip)
@@ -218,7 +215,7 @@ def restart_apache_binary(bin):
     check_output('%s -k restart' % bin, shouldPrint=True)
 
 def restart_apache_script(script):
-    check_output('%s restart' % script, shouldPrint=False)
+    check_output('%s restart' % script)
 
 def restart_apache():
     if LINUX == 'Ubuntu':

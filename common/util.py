@@ -1,7 +1,7 @@
 #!/usr/bin/python3.10
 
 import sys, select, time
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import Popen, PIPE, STDOUT, run, call
 
 def check_output(args, shouldPrint=True):
     return check_both(args, shouldPrint)[0]
@@ -31,7 +31,8 @@ def check_both(args, shouldPrint=True, check=True):
     return out
 
 def run_bg(args):
-    Popen(args, shell=True)
+    # Popen(args, shell=True)
+    call(args + " &",shell=True)
 
 # A generator returning each line in a file with comments removed
 # f is an open file object

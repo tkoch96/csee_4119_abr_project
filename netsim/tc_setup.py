@@ -30,6 +30,7 @@ class TC_Wrapper:
             ip_pair_str = self.args.ip_pair[0] + self.args.ip_pair[1]
         else:
             ip_pair_str = self.args.ip_pair[1] + self.args.ip_pair[0]
+
         return (int(hashlib.sha1(ip_pair_str).hexdigest(), 16) % 9998) + 1
 
 
@@ -65,7 +66,6 @@ class TC_Wrapper:
             traffic_class = self.class_for_ip_pair(self.args.ip_pair)
         else:
             traffic_class = DEFAULT_CLASS
-
         # Update the queues for the traffic class with the new BW/latency
         cmd = '{} class replace dev {} parent {}: classid {}:{} htb rate {} ceil {}'.format(
             TC, self.args.interface, ROOT_Q_HANDLE, ROOT_Q_HANDLE, traffic_class,
