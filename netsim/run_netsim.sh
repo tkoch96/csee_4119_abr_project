@@ -13,4 +13,4 @@ if [ "$2" == "start" ]; then
 	sleep 1
 fi
 echo "Running netsim command, output in netsimlogout.txt"
-sudo ./netsim.py "$1" "$2" &>netsimlogout.txt
+sudo ./netsim.py "$@" &>netsimlogout.txt
