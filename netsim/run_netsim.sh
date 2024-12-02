@@ -9,7 +9,7 @@ if [ "$2" == "start" ]; then
 	### This needs to be called in a shell process
 	### If you call it in a Python process, it will die when the Python process dies
 	echo "Starting click"
-	sudo /usr/local/bin/click autogen.click &>/dev/null &
+	sudo nohup /usr/local/bin/click autogen.click &>/dev/null &
 	sleep 1
 fi
 echo "Running netsim command, output in netsimlogout.txt"

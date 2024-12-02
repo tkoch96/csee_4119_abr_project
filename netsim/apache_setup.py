@@ -98,14 +98,12 @@ def configure_apache_single_conf(ip_list, conf, conf_bak, doc_root):
                 if 'ServerName' in line and line[0] != '#':
                     found = True
                     break
-        conffile.closed
         with open(conf, 'a') as conffile:
             conffile.write('\n%s\n' % NETSIM_STRING)
             if not found:
                 conffile.write('\nServerName www.example.com:80\n')
             for ip in ip_list:
                 conffile.write(APACHE_VIRTUAL_HOST_TEMPLATE % (ip, ip, doc_root, doc_root))
-        conffile.closed
             
 
     except Exception as e:
@@ -121,8 +119,7 @@ def configure_apache_split_conf(ip_list, ports, ports_bak, sites_available, site
         for ip in ip_list:
             # append virtual hosts to ports.conf
             with open(ports, 'a') as portsfile:
-                portsfile.write('\n\nNameVirtualHost %s:8080\n' % ip)
-                portsfile.write('Listen %s:8080' % ip)
+                portsfile.write('Listen %s:8080\n' % ip)
 
             # make a conf file for this virtual host
             confpath = os.path.join(sites_available, ip)
